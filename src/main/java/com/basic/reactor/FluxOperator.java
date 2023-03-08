@@ -5,13 +5,13 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 import java.util.Arrays;
 
-public class ReactorApplication {
+public class FluxOperator {
 
     public static void main(String[] args) throws InterruptedException {
 //        emptyFlux();
 //        fooBarFlux();
-//        fooBarFromList();
-//        errorFlux();
+        fooBarFromList();
+//        errorFlux();s
 //        counterFlux();
     }
 
@@ -43,5 +43,9 @@ public class ReactorApplication {
                 .subscribe(System.out::println);
         Thread.sleep(3000);
     }
+
+
+
+
 
 }
