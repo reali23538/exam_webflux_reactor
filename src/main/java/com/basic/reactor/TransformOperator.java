@@ -26,8 +26,7 @@ public class TransformOperator {
     static void asyncCapitalizeMany() throws InterruptedException {
         Flux.just(new User("jin"), new User("lee"))
                 .flatMap(user -> Mono.just(new User(user.getUsername().toUpperCase())))
-                .subscribe(user -> user.getUsername());
-        Thread.sleep(3000);
+                .subscribe(user -> System.out.println(user.getUsername()));
     }
 
     public static class User {
