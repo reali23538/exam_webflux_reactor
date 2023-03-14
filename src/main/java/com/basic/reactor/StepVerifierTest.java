@@ -12,7 +12,9 @@ public class StepVerifierTest {
 //        expectFooBarComplete();
 //        expectFooBarError();
 //        expectSkylerJessiComplete();
-        expect10Elements();
+//        expect10Elements();
+//        requestAllExpectFor();
+        thenCancelTest();
     }
 
     static void expectFooBarComplete() {
@@ -70,6 +72,30 @@ public class StepVerifierTest {
                 .thenAwait(Duration.ofHours(1))
                 .expectNextCount(3600)
                 .verifyComplete();
+    }
+
+    static void requestAllExpectFor() {
+        Flux<Integer> flux = Flux.just(10, 20, 30, 40);
+
+        StepVerifier.create(flux)
+//                .expectNextCount(3) // fail
+                .expectNextCount(4) // success
+                .expectComplete()
+                .verify();
+    }
+
+    static void thenCancelTest() {
+        Flux<Integer> flux = Flux.range(10, 100).log();
+
+        // 10~100중 3개만 검증하고 종료
+        StepVerifier.create(flux)
+                .expectNext(10)
+                .thenRequest(1)
+                .expectNext(11)
+                .thenRequest(1)
+                .expectNext(12)
+                .thenCancel()
+                .verify();
     }
 
 }
