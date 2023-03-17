@@ -8,7 +8,8 @@ public class MonoOperator {
 //        emptyMono();
 //        monoWithNoSignal();
 //        fooMono();
-        errorMono();
+//        errorMono();
+        firstMono();
     }
 
     static void emptyMono() {
@@ -28,6 +29,18 @@ public class MonoOperator {
 
     static void errorMono() {
         Mono.error(IllegalStateException::new)
+                .subscribe(System.out::println);
+    }
+
+    static void firstMono() {
+        Mono<Integer> m1 = Mono.just(1);
+        Mono<String> m2 = Mono.just("A");
+
+//        Mono.first(m1, m2)
+//                .subscribe(System.out::println);
+//        Mono.firstWithSignal(m1, m2)
+//                .subscribe(System.out::println);
+        Mono.firstWithValue(m1, m2)
                 .subscribe(System.out::println);
     }
 
