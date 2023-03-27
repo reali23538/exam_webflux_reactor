@@ -1,6 +1,7 @@
 package com.basic.reactor;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -13,7 +14,8 @@ public class FluxOperator {
 //        fooBarFromList();
 //        errorFlux();
 //        counterFlux();
-        zipFlux();
+//        zipFlux();
+        thenFlux();
     }
 
     static void emptyFlux() {
@@ -54,6 +56,14 @@ public class FluxOperator {
                 .map(tuple -> tuple.getT1() + "/" + tuple.getT2() + "/" + tuple.getT3())
                 .subscribe(System.out::println);
     }
+
+    static void thenFlux() {
+        Flux<Integer> f = Flux.range(0, 10);
+        Mono<Void> m = f.then(); // 그냥 끝나는 Mono가 나옴
+        m.subscribe(System.out::println);
+    }
+
+
 
 
 

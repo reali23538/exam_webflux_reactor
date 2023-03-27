@@ -9,7 +9,9 @@ public class MonoOperator {
 //        monoWithNoSignal();
 //        fooMono();
 //        errorMono();
-        firstMono();
+//        firstMono();
+        justOrEmptyMono();
+//        defaultIfEmptyMono();
     }
 
     static void emptyMono() {
@@ -42,6 +44,48 @@ public class MonoOperator {
 //                .subscribe(System.out::println);
         Mono.firstWithValue(m1, m2)
                 .subscribe(System.out::println);
+    }
+
+    static void justOrEmptyMono() {
+//        User u = new User();
+//        u.setName("a");
+        User u = null;
+
+        Mono.justOrEmpty(u)
+                .subscribe(System.out::println);
+    }
+
+    static void defaultIfEmptyMono() {
+        Mono<User> m = Mono.empty();
+
+        m.defaultIfEmpty(new User("b"))
+                .subscribe(System.out::println);
+    }
+
+    static class User {
+        private String name;
+
+        User() {
+        }
+
+        User(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
 }
