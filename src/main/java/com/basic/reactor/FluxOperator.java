@@ -16,7 +16,6 @@ public class FluxOperator {
 //        counterFlux();
 //        zipFlux();
 //        thenFlux();
-        blockingFlux();
     }
 
     static void emptyFlux() {
@@ -62,12 +61,6 @@ public class FluxOperator {
         Flux<Integer> f = Flux.range(0, 10);
         Mono<Void> m = f.then(); // 그냥 끝나는 Mono가 나옴
         m.subscribe(System.out::println);
-    }
-
-    public static void blockingFlux() {
-        // blocking 되서 이렇게 안쓰는게 좋음
-        Iterable<Integer> itr = Flux.range(0, 10).toIterable();
-        itr.forEach(System.out::println);
     }
 
 }

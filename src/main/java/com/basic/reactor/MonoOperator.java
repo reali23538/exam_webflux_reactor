@@ -13,7 +13,6 @@ public class MonoOperator {
 
 //        justOrEmptyMono();
 //        defaultIfEmptyMono();
-        blockingMono();
     }
 
     static void emptyMono() {
@@ -62,12 +61,6 @@ public class MonoOperator {
 
         m.defaultIfEmpty(new User("b"))
                 .subscribe(System.out::println);
-    }
-
-    public static void blockingMono() {
-        // blocking 되서 이렇게 안쓰는게 좋음
-        String str = Mono.just("foo").block();
-        System.out.println(str);
     }
 
     static class User {
